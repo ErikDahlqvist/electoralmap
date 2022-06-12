@@ -6,7 +6,7 @@ function selectColor(color) {
 
 function initStats(states) {
 	console.log(states);
-	states.forEach(state => {
+	Object.keys(states).forEach(state => {
 
 		document.getElementById("stateMap").contentDocument.getElementById(state).addEventListener(
 			"click",
