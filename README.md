@@ -4,6 +4,6 @@ An interactive map of the United States electoral college, built using vanilla J
 <br/>
 <br/>
 ### Todo
-+ Make a svg map
-+ Make the map interactive
-+ Add electoral and state data
+- [x] Make a svg map
+- [] Make the map interactive
+- [] Add electoral and state data
