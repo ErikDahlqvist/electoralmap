@@ -1,0 +1,12 @@
+body {
+	background-color: black;
+	color: white;
+}
+
+noscript {
+	color: red;
+}
+
+path {
+	cursor: pointer;
+}
