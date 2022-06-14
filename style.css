@@ -11,6 +11,6 @@ noscript {
 }
 
 #stateMap {
-	max-height: 100vh;
-	max-width: 100vw;
+	max-height: var(--window-height);
+	max-width: var(--window-width);
 }

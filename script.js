@@ -24,3 +24,11 @@ function fetchData() {
 		.then(success => initStats(success))
 		.catch(error => console.error('There has been a problem with your fetch operation:', error));
 }
+
+document.documentElement.style.setProperty("--window-height", `${window.innerHeight}px`);
+document.documentElement.style.setProperty("--window-width", `${window.innerWidth}px`);
+
+window.addEventListener("resize", () => {
+	document.documentElement.style.setProperty("--window-height", `${window.innerHeight}px`);
+	document.documentElement.style.setProperty("--window-width", `${window.innerWidth}px`);
+});
