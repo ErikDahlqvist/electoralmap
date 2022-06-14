@@ -4,13 +4,10 @@ body {
 	display: flex;
 	justify-content: center;
 	margin: 0;
+	max-height: var(--window-height);
+	max-width: var(--window-width);
 }
 
 noscript {
 	color: red;
-}
-
-#stateMap {
-	max-height: var(--window-height);
-	max-width: var(--window-width);
 }
