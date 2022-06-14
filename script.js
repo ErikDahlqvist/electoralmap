@@ -25,10 +25,11 @@ function fetchData() {
 		.catch(error => console.error('There has been a problem with your fetch operation:', error));
 }
 
-document.documentElement.style.setProperty("--window-height", `${window.innerHeight}px`);
-document.documentElement.style.setProperty("--window-width", `${window.innerWidth}px`);
+setHeightWidth();
 
-window.addEventListener("resize", () => {
-	document.documentElement.style.setProperty("--window-height", `${window.innerHeight}px`);
+function setHeightWidth() {
 	document.documentElement.style.setProperty("--window-width", `${window.innerWidth}px`);
-});
+	document.documentElement.style.setProperty("--window-height", `${window.innerHeight}px`);
+}
+
+window.addEventListener("resize", () => { setHeightWidth() });
