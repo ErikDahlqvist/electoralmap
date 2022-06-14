@@ -12,14 +12,9 @@ var alignmentList = [
 
 function changeAlignment(state) {
 	for(let i = 0; i < alignmentList.length; i++) {
-		if (alignmentList[i] !== state.style.fill) {
-			console.log(alignmentList[i]);
-			continue;
-		}
+		if (alignmentList[i] !== state.style.fill) { continue; }
 		else if (alignmentList[i] === state.style.fill) {
-			console.log(`Last: ${alignmentList[i]}`);
 			state.style.fill = alignmentList[nextAlignment(i)];
-			console.log(nextAlignment(i));
 			break;
 		}
 	}
@@ -31,13 +26,11 @@ function nextAlignment(currentAlignment) {
 }
 
 function initStats(states) {
-	console.log(states);
 	Object.keys(states).forEach(state => {
 		document.getElementById("stateMap").contentDocument.getElementById(state).style.fill = alignmentList[0];
 		document.getElementById("stateMap").contentDocument.getElementById(state).addEventListener(
 			"click",
 			function() {
-				console.log(`Clicked on ${state}`)
 				changeAlignment(this);
 		});
 	});
