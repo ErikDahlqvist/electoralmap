@@ -30,28 +30,24 @@ let currentX = 0;
 
 function initMap(states) {
 
-	const stateMap = document.getElementById("stateMap").contentDocument;
+	const stateMap = document.getElementById("stateMap");
 
-	stateMap.addEventListener("wheel", e => e.preventDefault(), { passive: false });
+	stateMap.contentDocument.addEventListener("wheel", e => e.preventDefault(), { passive: false });
 
-	stateMap.addEventListener("wheel", function(event) {
-		if (event.deltaY < 0 && currentZoom < 4) {
-			document.getElementById("stateMap").style.transform = `scale(${currentZoom += 0.5})`;
-		}
-		if (event.deltaY > 0 && currentZoom > 1) {
-			document.getElementById("stateMap").style.transform = `scale(${currentZoom -= 0.5})`;
-		}
+	stateMap.contentDocument.addEventListener("wheel", function(event) {
+		if (event.deltaY < 0 && currentZoom < 4) { stateMap.style.transform = `scale(${currentZoom += 0.5})` }
+		if (event.deltaY > 0 && currentZoom > 1) { stateMap.style.transform = `scale(${currentZoom -= 0.5})` }
 	});
 
-	stateMap.addEventListener("mousedown", function(event) {
+	stateMap.contentDocument.addEventListener("mousedown", function(event) {
 		mousedown = true
 		currentY = event.clientY;
 		currentX = event.clientX;
 	});
 	
-	stateMap.addEventListener("mouseup", () => mousedown = false);
+	stateMap.contentDocument.addEventListener("mouseup", () => mousedown = false);
 
-	stateMap.addEventListener("mousemove", function(event) {
+	stateMap.contentDocument.addEventListener("mousemove", function(event) {
 		if (mousedown == true) {
 			document.querySelector(".mapContainer").scroll({
 				top: document.querySelector(".mapContainer").scrollTop + currentZoom * (currentY - event.clientY),
@@ -63,7 +59,7 @@ function initMap(states) {
 	});
 
 	Object.keys(states).forEach(state => {
-		let selectedState = document.getElementById("stateMap").contentDocument.getElementById(state);
+		let selectedState = stateMap.contentDocument.getElementById(state);
 		selectedState.style.fill = alignmentList[0];
 		selectedState.addEventListener("click", () => { changeAlignment(selectedState) });
 	});
