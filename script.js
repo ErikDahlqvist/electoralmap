@@ -13,7 +13,7 @@ var alignmentList = [
 function changeAlignment(state) {
 	for(let i = 0; i < alignmentList.length; i++) {
 		if (alignmentList[i] !== state.style.fill) { continue; }
-		else if (alignmentList[i] === state.style.fill) {
+		if (alignmentList[i] === state.style.fill) {
 			state.style.fill = alignmentList[nextAlignment(i)];
 			break;
 		}
