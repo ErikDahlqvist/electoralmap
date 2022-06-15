@@ -43,11 +43,17 @@ function initMap(states) {
 			stateMap.style.transform = `scale(${currentZoom += 0.5})`
 			mapContainer.scroll(
 				mapContainer.scrollTop + currentZoom * (currentY - event.clientY),
-				mapContainer.scrollTop + currentZoom * (currentY - event.clientY)
+				mapContainer.scrollLeft + currentZoom * (currentX - event.clientX)
 			);
 		}
 		if (event.deltaY > 0 && currentZoom > 1) {
+			let currentY = event.clientY;
+			let currentX = event.clientX;
 			stateMap.style.transform = `scale(${currentZoom -= 0.5})`
+			mapContainer.scroll(
+				mapContainer.scrollTop + currentZoom * (currentY - event.clientY),
+				mapContainer.scrollLeft + currentZoom * (currentX - event.clientX)
+			);
 		}
 	});
 
