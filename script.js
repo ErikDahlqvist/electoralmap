@@ -22,18 +22,14 @@ function changeAlignment(state) {
 
 const nextAlignment = currentAlignment => ((currentAlignment + 1) < alignmentList.length) ? currentAlignment + 1 : 0;
 
-
-let currentZoom = 1;
-let mousedown = false;
-let currentY = 0;
-let currentX = 0;
-
 function initMap(states) {
 
 	const stateMap = document.getElementById("stateMap");
 	const mapContainer = document.querySelector(".mapContainer");
 
 	stateMap.contentDocument.addEventListener("wheel", e => e.preventDefault(), { passive: false });
+
+	let currentZoom = 1;
 
 	stateMap.contentDocument.addEventListener("wheel", function(event) {
 		let currentY = event.clientY;
@@ -47,6 +43,10 @@ function initMap(states) {
 			mapContainer.scrollTop + currentZoom * (currentY - event.clientY)
 		);
 	});
+
+	let mousedown = false;
+	let currentY = 0;
+	let currentX = 0;
 
 	stateMap.contentDocument.addEventListener("mousedown", function(event) {
 		mousedown = true
