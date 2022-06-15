@@ -20,10 +20,7 @@ function changeAlignment(state) {
 	}
 }
 
-function nextAlignment(currentAlignment) {
-	if ((currentAlignment + 1) < alignmentList.length) { return currentAlignment + 1 }
-	if ((currentAlignment + 1) >= alignmentList.length) { return 0 }
-}
+const nextAlignment = currentAlignment => ((currentAlignment + 1) < alignmentList.length) ? currentAlignment + 1 : 0;
 
 function initStats(states) {
 	Object.keys(states).forEach(state => {
