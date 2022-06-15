@@ -27,12 +27,9 @@ function nextAlignment(currentAlignment) {
 
 function initStats(states) {
 	Object.keys(states).forEach(state => {
-		document.getElementById("stateMap").contentDocument.getElementById(state).style.fill = alignmentList[0];
-		document.getElementById("stateMap").contentDocument.getElementById(state).addEventListener(
-			"click",
-			function() {
-				changeAlignment(this);
-		});
+		let selectedState = document.getElementById("stateMap").contentDocument.getElementById(state);
+		selectedState.style.fill = alignmentList[0];
+		selectedState.addEventListener("click", () => { changeAlignment(selectedState) });
 	});
 }
 
