@@ -15,13 +15,15 @@ noscript {
 .mapContainer {
 	max-height: 100%;
 	max-width: 100%;
-	height: 75%;
-	width: 75%;
-	overflow: scroll;
+	height: 62.5vmin;
+	width: 100vmin;
+	overflow: hidden;
 	scrollbar-width: none;
+	position: fixed;
 }
 
 object {
 	background: black;
-	transform-origin: left top;
+	position: absolute;
+	transform-origin: 0 0;
 }
