@@ -54,8 +54,8 @@ function initMap(states) {
 	stateMap.addEventListener("mousemove", function(event) {
 		if (mousedown == true) {
 			document.querySelector(".mapContainer").scroll({
-				top: document.querySelector(".mapContainer").scrollTop + (currentY - event.clientY),
-				left: document.querySelector(".mapContainer").scrollLeft + (currentX - event.clientX)
+				top: document.querySelector(".mapContainer").scrollTop + currentZoom * (currentY - event.clientY),
+				left: document.querySelector(".mapContainer").scrollLeft + currentZoom * (currentX - event.clientX)
 			});
 			currentY = event.clientY;
 			currentX = event.clientX;
