@@ -22,7 +22,44 @@ function changeAlignment(state) {
 
 const nextAlignment = currentAlignment => ((currentAlignment + 1) < alignmentList.length) ? currentAlignment + 1 : 0;
 
+
+let currentZoom = 1;
+let mousedown = false;
+let currentY = 0;
+let currentX = 0;
+
 function initMap(states) {
+
+	const stateMap = document.getElementById("stateMap").contentDocument;
+
+	stateMap.addEventListener("wheel", function(event) { 
+		if (event.deltaY < 0 && currentZoom < 8) {
+			document.getElementById("stateMap").style.transform = `scale(${currentZoom += 1})`;
+		}
+		if (event.deltaY > 0 && currentZoom > 1) {
+			document.getElementById("stateMap").style.transform = `scale(${currentZoom -= 1})`;
+		}
+	});
+
+	stateMap.addEventListener("mousedown", function(event) {
+		mousedown = true
+		currentY = event.clientY;
+		currentX = event.clientX;
+	});
+	
+	stateMap.addEventListener("mouseup", () => mousedown = false);
+
+	stateMap.addEventListener("mousemove", function(event) {
+		if (mousedown == true) {
+			document.querySelector(".mapContainer").scroll({
+				top: document.querySelector(".mapContainer").scrollTop + (currentY - event.clientY),
+				left: document.querySelector(".mapContainer").scrollLeft + (currentX - event.clientX)
+			});
+			currentY = event.clientY;
+			currentX = event.clientX;
+		}
+	});
+
 	Object.keys(states).forEach(state => {
 		let selectedState = document.getElementById("stateMap").contentDocument.getElementById(state);
 		selectedState.style.fill = alignmentList[0];
