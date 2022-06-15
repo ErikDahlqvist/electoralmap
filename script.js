@@ -42,8 +42,8 @@ function initMap(states) {
 			console.log(event);
 			stateMap.style.transform = `scale(${currentZoom += 0.5})`
 			mapContainer.scroll(
-				mapContainer.scrollTop + currentZoom * (currentY - event.clientY),
-				mapContainer.scrollLeft + currentZoom * (currentX - event.clientX)
+				mapContainer.scrollLeft + currentZoom * (currentX - event.clientX),
+				mapContainer.scrollTop + currentZoom * (currentY - event.clientY)
 			);
 		}
 		if (event.deltaY > 0 && currentZoom > 1) {
@@ -51,8 +51,8 @@ function initMap(states) {
 			let currentX = event.clientX;
 			stateMap.style.transform = `scale(${currentZoom -= 0.5})`
 			mapContainer.scroll(
-				mapContainer.scrollTop + currentZoom * (currentY - event.clientY),
-				mapContainer.scrollLeft + currentZoom * (currentX - event.clientX)
+				mapContainer.scrollLeft + currentZoom * (currentX - event.clientX),
+				mapContainer.scrollTop + currentZoom * (currentY - event.clientY)
 			);
 		}
 	});
