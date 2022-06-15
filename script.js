@@ -31,12 +31,24 @@ let currentX = 0;
 function initMap(states) {
 
 	const stateMap = document.getElementById("stateMap");
+	const mapContainer = document.querySelector(".mapContainer");
 
 	stateMap.contentDocument.addEventListener("wheel", e => e.preventDefault(), { passive: false });
 
 	stateMap.contentDocument.addEventListener("wheel", function(event) {
-		if (event.deltaY < 0 && currentZoom < 4) { stateMap.style.transform = `scale(${currentZoom += 0.5})` }
-		if (event.deltaY > 0 && currentZoom > 1) { stateMap.style.transform = `scale(${currentZoom -= 0.5})` }
+		if (event.deltaY < 0 && currentZoom < 4) {
+			let currentY = event.clientY;
+			let currentX = event.clientX;
+			console.log(event);
+			stateMap.style.transform = `scale(${currentZoom += 0.5})`
+			mapContainer.scroll(
+				mapContainer.scrollTop + currentZoom * (currentY - event.clientY),
+				mapContainer.scrollTop + currentZoom * (currentY - event.clientY)
+			);
+		}
+		if (event.deltaY > 0 && currentZoom > 1) {
+			stateMap.style.transform = `scale(${currentZoom -= 0.5})`
+		}
 	});
 
 	stateMap.contentDocument.addEventListener("mousedown", function(event) {
@@ -48,11 +60,11 @@ function initMap(states) {
 	stateMap.contentDocument.addEventListener("mouseup", () => mousedown = false);
 
 	stateMap.contentDocument.addEventListener("mousemove", function(event) {
-		if (mousedown == true) {
-			document.querySelector(".mapContainer").scroll({
-				top: document.querySelector(".mapContainer").scrollTop + currentZoom * (currentY - event.clientY),
-				left: document.querySelector(".mapContainer").scrollLeft + currentZoom * (currentX - event.clientX)
-			});
+		if (mousedown === true) {
+			mapContainer.scroll(
+				mapContainer.scrollLeft + currentZoom * (currentX - event.clientX),
+				mapContainer.scrollTop + currentZoom * (currentY - event.clientY)
+			);
 			currentY = event.clientY;
 			currentX = event.clientX;
 		}
