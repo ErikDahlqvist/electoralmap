@@ -32,7 +32,9 @@ function initMap(states) {
 
 	const stateMap = document.getElementById("stateMap").contentDocument;
 
-	stateMap.addEventListener("wheel", function(event) { 
+	stateMap.addEventListener("wheel", e => e.preventDefault(), { passive: false });
+
+	stateMap.addEventListener("wheel", function(event) {
 		if (event.deltaY < 0 && currentZoom < 8) {
 			document.getElementById("stateMap").style.transform = `scale(${currentZoom += 1})`;
 		}
