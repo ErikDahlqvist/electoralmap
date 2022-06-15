@@ -22,7 +22,7 @@ function changeAlignment(state) {
 
 const nextAlignment = currentAlignment => ((currentAlignment + 1) < alignmentList.length) ? currentAlignment + 1 : 0;
 
-function initStats(states) {
+function initMap(states) {
 	Object.keys(states).forEach(state => {
 		let selectedState = document.getElementById("stateMap").contentDocument.getElementById(state);
 		selectedState.style.fill = alignmentList[0];
@@ -33,7 +33,7 @@ function initStats(states) {
 function fetchData() {
 	fetch('/electoralmap/states.json')
 		.then(data => data.json())
-		.then(success => initStats(success))
+		.then(success => initMap(success))
 		.catch(error => console.error('There has been a problem with your fetch operation:', error));
 }
 
