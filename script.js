@@ -35,11 +35,11 @@ function initMap(states) {
 	stateMap.addEventListener("wheel", e => e.preventDefault(), { passive: false });
 
 	stateMap.addEventListener("wheel", function(event) {
-		if (event.deltaY < 0 && currentZoom < 8) {
-			document.getElementById("stateMap").style.transform = `scale(${currentZoom += 1})`;
+		if (event.deltaY < 0 && currentZoom < 4) {
+			document.getElementById("stateMap").style.transform = `scale(${currentZoom += 0.5})`;
 		}
 		if (event.deltaY > 0 && currentZoom > 1) {
-			document.getElementById("stateMap").style.transform = `scale(${currentZoom -= 1})`;
+			document.getElementById("stateMap").style.transform = `scale(${currentZoom -= 0.5})`;
 		}
 	});
 
