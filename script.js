@@ -27,9 +27,34 @@ function initMap(states) {
 	const stateMap = document.getElementById("stateMap");
 	const mapContainer = document.querySelector(".mapContainer");
 
-	stateMap.contentDocument.addEventListener("wheel", event => event.preventDefault(), { passive: false });
-
 	let currentZoom = 1;
+	let touchZoom = false;
+	let pinchLocation, pinchOrigin;
+
+	["touchstart", "touchend"].forEach(touchEvent => {
+		stateMap.contentDocument.addEventListener(touchEvent, event => {
+			if (event.touches.length === 2 && touchZoom === false) {
+				pinchOrigin = Math.hypot(event.touches[0].clientX - event.touches[1].clientX , event.touches[0].clientY - event.touches[1].clientY);
+				touchZoom = true;
+			}
+			if (event.touches.length !== 2 && touchZoom === true) {
+				pinchOrigin = undefined;
+				touchZoom = false;
+			}
+		});
+	});
+
+	stateMap.contentDocument.addEventListener("touchmove", event => {
+		if (touchZoom === true) {
+			pinchLocation = Math.hypot(event.touches[0].clientX - event.touches[1].clientX , event.touches[0].clientY - event.touches[1].clientY);
+			currentZoom = (pinchLocation / (pinchOrigin / currentZoom)).toFixed(4);
+			if (currentZoom < 1) { currentZoom = 1 }
+			if (currentZoom > 4) { currentZoom = 4 }
+			stateMap.style.transform = `scale(${currentZoom})`;
+		}
+	});
+
+	stateMap.contentDocument.addEventListener("wheel", event => event.preventDefault(), { passive: false });
 
 	stateMap.contentDocument.addEventListener("wheel", event => {
 		let currentY = event.clientY;
