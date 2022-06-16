@@ -27,11 +27,11 @@ function initMap(states) {
 	const stateMap = document.getElementById("stateMap");
 	const mapContainer = document.querySelector(".mapContainer");
 
-	stateMap.contentDocument.addEventListener("wheel", e => e.preventDefault(), { passive: false });
+	stateMap.contentDocument.addEventListener("wheel", event => event.preventDefault(), { passive: false });
 
 	let currentZoom = 1;
 
-	stateMap.contentDocument.addEventListener("wheel", function(event) {
+	stateMap.contentDocument.addEventListener("wheel", event => {
 		let currentY = event.clientY;
 		let currentX = event.clientX;
 
@@ -46,15 +46,15 @@ function initMap(states) {
 
 	let mousedown, currentY, currentX;
 
-	stateMap.contentDocument.addEventListener("mousedown", function(event) {
-		mousedown = true
+	stateMap.contentDocument.addEventListener("mousedown", event => {
+		mousedown = true;
 		currentY = event.clientY;
 		currentX = event.clientX;
 	});
 
 	stateMap.contentDocument.addEventListener("mouseup", () => mousedown = false);
 
-	stateMap.contentDocument.addEventListener("mousemove", function(event) {
+	stateMap.contentDocument.addEventListener("mousemove", event => {
 		if (mousedown === true) {
 			mapContainer.scroll(
 				mapContainer.scrollLeft + currentZoom * (currentX - event.clientX),
