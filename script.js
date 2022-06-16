@@ -44,9 +44,7 @@ function initMap(states) {
 		);
 	});
 
-	let mousedown = false;
-	let currentY = 0;
-	let currentX = 0;
+	let mousedown, currentY, currentX;
 
 	stateMap.contentDocument.addEventListener("mousedown", function(event) {
 		mousedown = true
