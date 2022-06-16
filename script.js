@@ -59,13 +59,13 @@ function initMap(states) {
 	stateMap.contentDocument.addEventListener("wheel", event => {
 		let currentY = event.clientY;
 		let currentX = event.clientX;
-
+		
 		if (event.deltaY < 0 && currentZoom < 4) { stateMap.style.transform = `scale(${currentZoom += 0.5})` }
 		if (event.deltaY > 0 && currentZoom > 1) { stateMap.style.transform = `scale(${currentZoom -= 0.5})` }
 
 		mapContainer.scroll(
-			mapContainer.scrollLeft + currentZoom * (currentX - event.clientX),
-			mapContainer.scrollTop + currentZoom * (currentY - event.clientY)
+			currentZoom * currentX - event.clientX,
+			currentZoom * currentY - event.clientY
 		);
 	});
 
