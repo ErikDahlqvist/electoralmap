@@ -96,8 +96,9 @@ function initMap(states) {
 		}
 	});
 
-	Object.keys(states).forEach(state => {
-		let selectedState = stateMap.contentDocument.getElementById(state);
+	states.forEach(state => {
+		let selectedState = stateMap.contentDocument.getElementById(state[0]);
+		selectedState.setAttribute("ev", state[1]);
 		selectedState.style.fill = alignmentList[0];
 		selectedState.addEventListener("click", () => { changeAlignment(selectedState) });
 	});
