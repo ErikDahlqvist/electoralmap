@@ -29,13 +29,15 @@ function initMap(states) {
 
 	let currentZoom = 1;
 	let touchZoom = false;
-	let pinchLocation, pinchOrigin;
+	let pinchLocation, pinchOrigin, originY, originX;
 
 	["touchstart", "touchend"].forEach(touchEvent => {
 		stateMap.contentDocument.addEventListener(touchEvent, event => {
 			if (event.touches.length === 2 && touchZoom === false) {
 				pinchOrigin = Math.hypot(event.touches[0].clientX - event.touches[1].clientX , event.touches[0].clientY - event.touches[1].clientY);
 				touchZoom = true;
+				originX = (event.touches[0].clientX + event.touches[1].clientX) / 2;
+				originY = (event.touches[0].clientY + event.touches[1].clientY) / 2;
 			}
 			if (event.touches.length !== 2 && touchZoom === true) {
 				pinchOrigin = undefined;
@@ -51,6 +53,10 @@ function initMap(states) {
 			if (currentZoom < 1) { currentZoom = 1 }
 			if (currentZoom > 4) { currentZoom = 4 }
 			stateMap.style.transform = `scale(${currentZoom})`;
+			mapContainer.scroll(
+				currentZoom * originX - ((event.touches[0].clientX + event.touches[1].clientX) / 2),
+				currentZoom * originY - ((event.touches[0].clientY + event.touches[1].clientY) / 2)
+			);
 		}
 	});
 
