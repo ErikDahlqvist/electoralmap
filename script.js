@@ -85,8 +85,6 @@ function initMap(states) {
 				mapContainer.scrollLeft + currentZoom * (currentX - event.clientX),
 				mapContainer.scrollTop + currentZoom * (currentY - event.clientY)
 			);
-			currentY = event.clientY;
-			currentX = event.clientX;
 		}
 	});
 
