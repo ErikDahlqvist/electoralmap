@@ -57,16 +57,18 @@ function initMap(states) {
 	stateMap.contentDocument.addEventListener("wheel", event => event.preventDefault(), { passive: false });
 
 	stateMap.contentDocument.addEventListener("wheel", event => {
-		let currentY = event.clientY;
-		let currentX = event.clientX;
+		if ((event.deltaY < 0 && currentZoom < 4) || (event.deltaY > 0 && currentZoom > 1)) {
+			let currentY = event.clientY;
+			let currentX = event.clientX;
 		
-		if (event.deltaY < 0 && currentZoom < 4) { stateMap.style.transform = `scale(${currentZoom += 0.5})` }
-		if (event.deltaY > 0 && currentZoom > 1) { stateMap.style.transform = `scale(${currentZoom -= 0.5})` }
+			if (event.deltaY < 0 && currentZoom < 4) { stateMap.style.transform = `scale(${currentZoom += 0.5})` }
+			if (event.deltaY > 0 && currentZoom > 1) { stateMap.style.transform = `scale(${currentZoom -= 0.5})` }
 
-		mapContainer.scroll(
-			currentZoom * currentX - event.clientX,
-			currentZoom * currentY - event.clientY
-		);
+			mapContainer.scroll(
+				currentZoom * currentX - event.clientX,
+				currentZoom * currentY - event.clientY
+			);
+		}
 	});
 
 	let mousedown, currentY, currentX;
